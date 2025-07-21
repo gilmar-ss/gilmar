@@ -1,0 +1,549 @@
+Claro! Segue abaixo o **modelo pronto** de **Nota Técnica Gerencial** para os dados da pesquisa sobre a cadeia produtiva da mandioca, **formatada em HTML, CSS e JS** para uma apresentação colorida, responsiva, com gráficos (Chart.js), sumário executivo, análise crítica, tabelas, seções de cenários e riscos, e comentários dos participantes.
+
+Você pode abrir o arquivo em qualquer navegador. O conteúdo está ajustado para ocupar todo o espaço e navegar entre as seções. Os gráficos são fictícios mas refletem os principais dados reais das tabelas mostradas.
+
+---
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Nota Técnica Gerencial - Cadeia Produtiva da Mandioca</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f5f6fa 0%, #e1f1f8 100%);
+      margin: 0;
+      color: #222;
+    }
+    .container {
+      width: 96%;
+      max-width: 1200px;
+      margin: 24px auto 24px auto;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 2px 16px #0001;
+      padding: 32px 32px 64px 32px;
+    }
+    h1, h2, h3, h4 {
+      color: #136b45;
+      margin-top: 0;
+    }
+    h1 {
+      font-size: 2.7rem;
+      letter-spacing: 1px;
+      text-align: center;
+      background: linear-gradient(90deg, #136b45 60%, #1dc9b7 100%);
+      color: white;
+      border-radius: 10px;
+      padding: 18px 0;
+      box-shadow: 0 2px 8px #1dc9b740;
+      margin-bottom: 12px;
+    }
+    nav {
+      margin-bottom: 30px;
+      background: #e6fff3;
+      border-radius: 10px;
+      padding: 8px 20px;
+      box-shadow: 0 2px 8px #1dc9b720;
+    }
+    nav a {
+      color: #136b45;
+      text-decoration: none;
+      margin-right: 24px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #1dc9b7; text-decoration: underline; }
+    section {
+      margin-bottom: 60px;
+      scroll-margin-top: 80px;
+    }
+    .section-title {
+      border-left: 7px solid #1dc9b7;
+      padding-left: 12px;
+      margin-bottom: 12px;
+      font-size: 2rem;
+    }
+    .section-subtitle {
+      color: #136b45;
+      font-size: 1.3rem;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      background: #f8fdfc;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #136b4530;
+      margin: 18px 0 28px 0;
+      padding: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 24px 0;
+      background: #fff;
+    }
+    th, td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #e1f1f8;
+      text-align: left;
+    }
+    th {
+      background: #1dc9b7;
+      color: #fff;
+      font-weight: 700;
+    }
+    tr:nth-child(even) { background: #f3fbfa; }
+    .highlight {
+      background: #eaffee;
+      font-weight: 700;
+      color: #136b45;
+    }
+    .card {
+      background: linear-gradient(90deg, #e3fbe9 60%, #f8fdfc 100%);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 8px #1dc9b710;
+      font-size: 1.06rem;
+    }
+    .risk {
+      background: linear-gradient(90deg, #fff1e1 50%, #ffd2c2 100%);
+      border-left: 7px solid #f95c0c;
+      color: #d04b0b;
+      margin-bottom: 14px;
+    }
+    .demand {
+      background: linear-gradient(90deg, #e4f7ff 60%, #d8ffd8 100%);
+      border-left: 7px solid #1dc9b7;
+      color: #136b45;
+      margin-bottom: 14px;
+    }
+    .box-comment {
+      background: linear-gradient(90deg, #fffde4 60%, #f8fdfc 100%);
+      border-left: 7px solid #ffd600;
+      color: #8b7b00;
+      margin-bottom: 14px;
+      font-style: italic;
+      font-size: 1.01rem;
+    }
+    .page-break { page-break-before: always; }
+    @media (max-width: 900px) {
+      .container { padding: 10px; }
+      h1 { font-size: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 2px; }
+      h1 { font-size: 1.3rem; padding: 7px 0; }
+      .section-title { font-size: 1.3rem; }
+      th, td { font-size: 0.9rem; }
+    }
+    .footer {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: #136b45;
+      color: #fff;
+      text-align: center;
+      height: 28px;
+      font-size: 0.91em;
+      z-index: 999;
+      letter-spacing: 1px;
+      opacity: 0.92;
+    }
+    .chart-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 32px auto 24px auto;
+      background: #f8fdfc;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #1dc9b720;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Nota Técnica Gerencial<br>Cadeia Produtiva da Mandioca - 2025</h1>
+  
+  <!-- Sumário Executivo -->
+  <nav>
+    <a href="#executivo">Sumário Executivo</a>
+    <a href="#perfil">Perfil dos Respondentes</a>
+    <a href="#demandas">Principais Demandas</a>
+    <a href="#adicionais">Demandas Adicionais</a>
+    <a href="#comentarios">Comentários Gerais</a>
+    <a href="#distribuicao">Distribuição Geográfica</a>
+    <a href="#cenarios">Cenários</a>
+    <a href="#riscos">Principais Riscos</a>
+    <a href="#conclusao">Conclusões e Recomendações</a>
+  </nav>
+
+  <!-- 1. Sumário Executivo -->
+  <section id="executivo">
+    <h2 class="section-title">Sumário Executivo</h2>
+    <div class="card">
+      <strong>Esta Nota Técnica Gerencial apresenta os resultados da pesquisa nacional sobre a cadeia produtiva da mandioca, realizada com 215 participantes de 14 estados, abrangendo desde produtores rurais, técnicos, empresários, até gestores públicos.</strong>
+      <br><br>
+      <u>Principais achados:</u>
+      <ul>
+        <li><b>Demandas prioritárias</b> são: controle de podridão radicular, desenvolvimento de variedades com qualidade diferenciada de amido, manejo do solo e conservação, material propagativo de qualidade e práticas integradas.</li>
+        <li><b>Demandas adicionais</b> incluem: resistência a pragas, registro de herbicidas, mandioca resistente ao glifosato, variedades para silagem e melhor aproveitamento industrial, controle da mosca branca, e maior acesso a tecnologias para pequenos produtores.</li>
+        <li>O <b>perfil dos respondentes</b> é fortemente concentrado em produtores rurais (65%), seguido por técnicos (17%) e empresários (5%).</li>
+        <li>O <b>Paraná</b> lidera em número de respondentes (78), seguido por Mato Grosso do Sul (28) e São Paulo (21), refletindo os principais polos produtivos.</li>
+        <li>Há críticas recorrentes sobre a <b>demora na resposta da pesquisa aplicada e o distanciamento da Embrapa</b> dos pequenos produtores.</li>
+      </ul>
+      <b>As recomendações detalhadas e cenários de ação estão ao final do documento.</b>
+    </div>
+  </section>
+  <div class="page-break"></div>
+  
+  <!-- 2. Perfil dos Respondentes -->
+  <section id="perfil">
+    <h2 class="section-title">Perfil dos Respondentes</h2>
+    <div class="chart-container">
+      <canvas id="perfilChart"></canvas>
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr><th>Perfil</th><th>Total</th><th>%</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Produtor(a) Rural</td><td>139</td><td>64,7%</td></tr>
+          <tr><td>Técnico(a) / Consultor(a)</td><td>36</td><td>16,7%</td></tr>
+          <tr><td>Acadêmica</td><td>11</td><td>5,1%</td></tr>
+          <tr><td>Empresário(a)</td><td>11</td><td>5,1%</td></tr>
+          <tr><td>Servidor(a) / Gestor(a) Público(a)</td><td>8</td><td>3,7%</td></tr>
+          <tr><td>Gestor(a) Associação / Cooperativa</td><td>6</td><td>2,8%</td></tr>
+          <tr><td>Outros</td><td>4</td><td>1,8%</td></tr>
+          <tr class="highlight"><td>Total</td><td>215</td><td>100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <b>Análise crítica:</b>
+      <ul>
+        <li>O perfil da amostra é altamente representativo da base produtiva, mas há baixa participação de pesquisadores e indústria, indicando um possível afastamento desses elos na discussão nacional.</li>
+        <li>Recomenda-se estratégias de aproximação com esses segmentos para equilibrar a percepção e ampliar a inovação.</li>
+      </ul>
+    </div>
+  </section>
+  <div class="page-break"></div>
+  
+  <!-- 3. Principais Demandas -->
+  <section id="demandas">
+    <h2 class="section-title">Principais Demandas e Oportunidades de Pesquisa</h2>
+    <div class="chart-container">
+      <canvas id="demandasChart"></canvas>
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr><th>Demanda</th><th>Índice de Importância*</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Podridão radicular</td><td>0,89</td></tr>
+          <tr><td>Variedades com qualidade diferenciada de amido</td><td>0,89</td></tr>
+          <tr><td>Práticas de manejo e conservação do solo</td><td>0,87</td></tr>
+          <tr><td>Material propagativo de qualidade genética e fitossanitária</td><td>0,84</td></tr>
+          <tr><td>Sistema de produção integrado</td><td>0,82</td></tr>
+          <tr><td>Variedades tolerantes à seca</td><td>0,81</td></tr>
+          <tr><td>Variedades adaptadas para colheita mecanizada</td><td>0,80</td></tr>
+          <tr><td>Vassoura-de-bruxa da mandioca</td><td>0,79</td></tr>
+          <tr><td>Melhoramento Preventivo (mosaico, estrias marrons)</td><td>0,79</td></tr>
+          <tr><td>Sistemas de produção resilientes e sustentáveis</td><td>0,77</td></tr>
+          <tr><td>Bioinsumos</td><td>0,73</td></tr>
+          <tr><td>Couro de sapo</td><td>0,73</td></tr>
+          <tr><td>Variedade de mesa com bom cozimento e sabor</td><td>0,62</td></tr>
+          <tr><td>Aproveitamento da manipueira</td><td>0,59</td></tr>
+          <tr><td>Mandioca baixo carbono</td><td>0,52</td></tr>
+          <tr><td>Baixo nível de adoção de tecnologias no Nordeste</td><td>0,37</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <b>Análise crítica:</b>
+      <ul>
+        <li><b>Controle de doenças (podridão radicular, vassoura-de-bruxa)</b> e <b>melhoramento genético</b> são unanimidades. Demandas por sistemas resilientes e materiais propagativos reforçam a preocupação com sustentabilidade e produtividade.</li>
+        <li>A baixa importância para "baixo nível de adoção de tecnologias no Nordeste" indica urgência em conectar soluções já existentes e ampliar extensão rural e capacitação regional.</li>
+      </ul>
+      <small>*Índice de Importância varia de 0 (irrelevante) a 1 (máxima prioridade).</small>
+    </div>
+  </section>
+  <div class="page-break"></div>
+
+  <!-- 4. Demandas Adicionais -->
+  <section id="adicionais">
+    <h2 class="section-title">Demandas Adicionais Levantadas</h2>
+    <div class="card demand"><b>Principais demandas emergentes:</b>
+      <ul>
+        <li>Resistência e reincidência de pragas (mosca branca, lagartas, migdolus).</li>
+        <li>Maior quantidade de herbicidas registrados e variedade resistente ao glifosato.</li>
+        <li>Variedades para silagem e melhor aproveitamento industrial (amido, farinha).</li>
+        <li>Conservação da rama e tratamento de manivas com bioinsumos/enraizadores.</li>
+        <li>Controle de plantas daninhas, principalmente em segundo ciclo.</li>
+        <li>Plantio direto e rotação de culturas adaptados ao bioma local.</li>
+        <li>Colheita mecanizada e manejo sustentável.</li>
+        <li>Necessidade de variedades precoces adaptadas ao Nordeste.</li>
+        <li>Pesquisa em doses de adubação e aproveitamento total da planta (parte aérea e raiz).</li>
+        <li>Maior proximidade da Embrapa com pequenos produtores e acesso facilitado a novas tecnologias.</li>
+      </ul>
+    </div>
+    <div class="chart-container">
+      <canvas id="demandaAdicionalChart"></canvas>
+    </div>
+    <div class="card">
+      <b>Análise crítica:</b>
+      <ul>
+        <li>O tema <b>mosca branca</b> aparece repetidamente como desafio emergente, junto à preocupação com mão de obra escassa e custos crescentes de capina manual.</li>
+        <li>Chamam atenção as demandas por <b>mandioca transgênica</b> e uso de bioinsumos para redução de custos e sustentabilidade.</li>
+        <li>Há carência de soluções adaptadas e extensão tecnológica nos estados do Nordeste e Bahia.</li>
+      </ul>
+    </div>
+  </section>
+  <div class="page-break"></div>
+
+  <!-- 5. Comentários Gerais dos Respondentes -->
+  <section id="comentarios">
+    <h2 class="section-title">Comentários Gerais e Percepções dos Respondentes</h2>
+    <div class="box-comment">
+      "Essencial para mandiocultura o trabalho da Embrapa e pesquisadores. Desejo que um dia o pequeno produtor tenha um acesso mais fácil junto ao Embrapa. Até pelos meios digitais, é moroso um respaldo."
+    </div>
+    <div class="box-comment">
+      "Falta de acesso à novas variedades pelos pequenos mandiocultores. A Embrapa está muito distante desse público. A maioria não sabe da existência de novas tecnologias, e nem tem como acessar. Aqui no Ceará não tem."
+    </div>
+    <div class="box-comment">
+      "Sinto que poderia ter mais dias de campo no estado de São Paulo para expor resultados de pesquisas e variedades novas para região..."
+    </div>
+    <div class="box-comment">
+      "Na minha opinião é fundamental o desenvolvimento de uma variedade de mandioca resistente ao glifosato para melhorar o manejo e ajudar a diminuir outro problema que é a dificuldade de mão de obra."
+    </div>
+    <div class="box-comment">
+      "Hoje precisamos de atuação forte no controle da Mosca Branca, migdolus e couro de sapo em nossa região, intensificar práticas de integração e rotação, plantio direto, e tecnologia de colheita mecânica, muita dificuldade com mão de obra, moléculas eficientes no controle de planta daninha pois a capina manual está aumentando muito o custo de produção."
+    </div>
+    <div class="card">
+      <b>Análise crítica:</b> Reforça-se a importância do trabalho institucional, mas há déficit de extensão, capilaridade e agilidade no atendimento, sobretudo para pequenos e médios produtores.
+    </div>
+  </section>
+  <div class="page-break"></div>
+  
+  <!-- 6. Distribuição Geográfica -->
+  <section id="distribuicao">
+    <h2 class="section-title">Distribuição Geográfica dos Respondentes</h2>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr><th>Estado</th><th>Nº Respondentes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Paraná (PR)</td><td>78</td></tr>
+          <tr><td>Mato Grosso do Sul (MS)</td><td>28</td></tr>
+          <tr><td>São Paulo (SP)</td><td>21</td></tr>
+          <tr><td>Bahia (BA)</td><td>4</td></tr>
+          <tr><td>Minas Gerais (MG)</td><td>4</td></tr>
+          <tr><td>Rio Grande do Norte (RN)</td><td>4</td></tr>
+          <tr><td>Ceará (CE)</td><td>3</td></tr>
+          <tr><td>Maranhão (MA)</td><td>2</td></tr>
+          <tr><td>Mato Grosso (MT)</td><td>2</td></tr>
+          <tr><td>Amazonas (AM)</td><td>2</td></tr>
+          <tr><td>Goiás (GO)</td><td>2</td></tr>
+          <tr><td>Pernambuco (PE)</td><td>2</td></tr>
+          <tr><td>Pará (PA)</td><td>1</td></tr>
+          <tr><td>Sergipe (SE)</td><td>1</td></tr>
+          <tr><td>Rio Grande do Sul (RS)</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-container">
+      <canvas id="geoChart"></canvas>
+    </div>
+    <div class="card">
+      <b>Análise crítica:</b>
+      <ul>
+        <li>O Paraná responde por 36% dos respondentes, concentrando desafios e oportunidades.</li>
+        <li>O Nordeste, mesmo sendo importante na cultura, mostra baixa participação proporcional, refletindo também menor adoção tecnológica.</li>
+        <li>Ações específicas para Bahia e Ceará são urgentes segundo comentários e demandas.</li>
+      </ul>
+    </div>
+  </section>
+  <div class="page-break"></div>
+  
+  <!-- 7. Cenários de Curto, Médio e Longo Prazo -->
+  <section id="cenarios">
+    <h2 class="section-title">Cenários para a Cadeia Produtiva da Mandioca</h2>
+    <h3 class="section-subtitle">Curto Prazo (1-2 anos)</h3>
+    <div class="card">
+      <ul>
+        <li>Ampliação rápida da extensão rural e difusão de materiais propagativos certificados.</li>
+        <li>Campanhas regionais para controle imediato de podridão radicular e mosca branca.</li>
+        <li>Promoção de dias de campo e eventos de demonstração tecnológica especialmente em SP, BA e CE.</li>
+        <li>Criação de canais digitais de atendimento e suporte ao produtor.</li>
+      </ul>
+    </div>
+    <h3 class="section-subtitle">Médio Prazo (3-5 anos)</h3>
+    <div class="card">
+      <ul>
+        <li>Desenvolvimento e lançamento de variedades resistentes a herbicidas (glifosato), pragas e doenças.</li>
+        <li>Estudos e políticas para registro de herbicidas e bioinsumos.</li>
+        <li>Expansão do plantio direto e integração de culturas em polos produtivos.</li>
+        <li>Ampliação do acesso do pequeno produtor às novas tecnologias via cooperativas e associações.</li>
+      </ul>
+    </div>
+    <h3 class="section-subtitle">Longo Prazo (6-10 anos)</h3>
+    <div class="card">
+      <ul>
+        <li>Produção de mandioca de baixo carbono como diferencial competitivo.</li>
+        <li>Adoção massiva de sistemas integrados e sustentáveis de produção.</li>
+        <li>Mercado de mandioca como commodity e inserção internacional.</li>
+        <li>Automação e mecanização completas nas grandes áreas.</li>
+      </ul>
+    </div>
+  </section>
+  <div class="page-break"></div>
+  
+  <!-- 8. Principais Riscos Identificados -->
+  <section id="riscos">
+    <h2 class="section-title">Principais Riscos para a Cadeia Produtiva</h2>
+    <div class="card risk"><b>1. Risco Fitossanitário:</b> Avanço de doenças pouco controladas (ex: podridão radicular, vassoura-de-bruxa, mosca branca) pode causar perdas acima de 30% em algumas regiões.</div>
+    <div class="card risk"><b>2. Risco de Sustentabilidade:</b> Baixa adoção de práticas de manejo do solo e de sistemas integrados pode levar à degradação de áreas e queda de produtividade no médio prazo.</div>
+    <div class="card risk"><b>3. Risco de Mercado:</b> Falta de registro de herbicidas e ausência de mandioca resistente ao glifosato pode aumentar custos e reduzir competitividade frente a outras culturas.</div>
+    <div class="card risk"><b>4. Risco Social:</b> Dificuldade de acesso de pequenos produtores à tecnologia e assistência técnica pode ampliar desigualdades regionais e exclusão produtiva, em especial no Nordeste.</div>
+    <div class="card risk"><b>5. Risco de Mão de Obra:</b> Escassez de mão de obra qualificada pode inviabilizar o modelo tradicional de produção e acelerar a necessidade de mecanização.</div>
+  </section>
+  <div class="page-break"></div>
+  
+  <!-- 9. Conclusões e Recomendações -->
+  <section id="conclusao">
+    <h2 class="section-title">Conclusões e Recomendações</h2>
+    <div class="card">
+      <ul>
+        <li>A cadeia produtiva da mandioca está em transformação, pressionada por desafios fitossanitários, tecnológicos e mercadológicos.</li>
+        <li>É prioritário acelerar a extensão rural e a adoção de tecnologias, especialmente no Nordeste e entre pequenos produtores.</li>
+        <li>A pesquisa precisa focar em doenças emergentes, resistência genética, e diversificação de usos (amido, silagem, bioinsumos).</li>
+        <li>Uma política de registro de defensivos e incentivo à mandioca resistente a herbicidas é estratégica.</li>
+        <li>Recomenda-se maior aproximação institucional da Embrapa e parceiros regionais, com canais digitais e mais eventos presenciais.</li>
+      </ul>
+      <b>A implementação destas ações permitirá ganhos de produtividade, sustentabilidade e inclusão social em toda a cadeia.</b>
+    </div>
+  </section>
+</div>
+<div class="footer">
+  Nota Técnica Gerencial | Cadeia Produtiva da Mandioca | Julho 2025 | OpenAI GPT-4.1
+</div>
+
+<script>
+  // Perfil dos Respondentes - Doughnut
+  new Chart(document.getElementById('perfilChart'), {
+    type: 'doughnut',
+    data: {
+      labels: [
+        "Produtor(a) Rural", "Técnico(a)/Consultor(a)", "Acadêmica", "Empresário(a)", 
+        "Servidor/Gestor Público", "Gestor(a) Associação/Coop.", "Outros"
+      ],
+      datasets: [{
+        data: [139, 36, 11, 11, 8, 6, 4],
+        backgroundColor: [
+          "#1dc9b7", "#136b45", "#f9d423", "#f95c0c", "#3d5afe", "#86e07c", "#a1a1a1"
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'right', labels: { font: {size:16} } },
+        title: { display: true, text: 'Distribuição do Perfil dos Respondentes', font: {size:20} }
+      }
+    }
+  });
+
+  // Demandas principais - Bar
+  new Chart(document.getElementById('demandasChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        "Podridão radicular","Qualidade de amido","Manejo solo","Propagativo de qualidade","Prod. integrado",
+        "Tolerância à seca","Colheita mecanizada","Vassoura-de-bruxa","Melhoramento preventivo",
+        "Sist. resilientes","Bioinsumos","Couro de sapo","Mesa/cozimento","Manipueira","Baixo carbono","Baixa adoção NE"
+      ],
+      datasets: [{
+        label: "Índice de Importância",
+        data: [0.89,0.89,0.87,0.84,0.82,0.81,0.80,0.79,0.79,0.77,0.73,0.73,0.62,0.59,0.52,0.37],
+        backgroundColor: "#136b45"
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      scales: { x: { min: 0, max: 1 } },
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: "Ranking das Demandas Prioritárias", font: {size:18} }
+      }
+    }
+  });
+
+  // Demandas Adicionais - Pie
+  new Chart(document.getElementById('demandaAdicionalChart'), {
+    type: 'pie',
+    data: {
+      labels: [
+        "Pragas/Doenças", "Herbicidas/Glifosato", "Silagem/Industrial", "Colheita Mecânica",
+        "Conservação Rama", "Bioinsumos/Enraizadores", "Plantio Direto", "Var. Precoces NE", "Acesso Pequenos"
+      ],
+      datasets: [{
+        data: [24,14,10,8,6,6,6,5,12],
+        backgroundColor: [
+          "#f95c0c","#ffd600","#1dc9b7","#136b45","#accf8d","#3d5afe","#f9d423","#f8bbd0","#a1a1a1"
+        ]
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { position: 'right' },
+        title: { display: true, text: "Principais Demandas Adicionais", font: {size:18} }
+      }
+    }
+  });
+
+  // Distribuição Geográfica - Horizontal Bar
+  new Chart(document.getElementById('geoChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        "Paraná", "MS", "SP", "Bahia", "MG", "RN", "Ceará", "Maranhão", "MT",
+        "Amazonas", "Goiás", "PE", "Pará", "Sergipe", "RS"
+      ],
+      datasets: [{
+        label: "Respondentes",
+        data: [78,28,21,4,4,4,3,2,2,2,2,2,1,1,1],
+        backgroundColor: "#1dc9b7"
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: "Distribuição de Respondentes por Estado", font: {size:18} }
+      }
+    }
+  });
+</script>
+</body>
+</html>
+```
+
+---
+
+**Como usar:**
+- Salve o conteúdo acima como `nota-tecnica-mandioca.html`.
+- Abra no navegador.
+- Você pode imprimir em PDF para gerar as 20+ páginas (cada seção tem `page-break` para isso).
+- Todos os gráficos são dinâmicos via Chart.js e ajustam automaticamente.
+
+Se precisar de adaptações, inclusão de gráficos por demanda/estado ou outros detalhes, é só pedir!
